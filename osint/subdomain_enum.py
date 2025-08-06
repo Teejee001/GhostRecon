@@ -1,35 +1,26 @@
 import requests
-import json
-import os
+import time
 
-def enumerate_subdomains(domain):
-    cache_file = f"cache/{domain.replace('.', '_')}_subdomains.json"
+def enumerate_subdomains(domain, retries=2, timeout=30):
+    url = f"https://crt.sh/?q=%.{domain}&output=json"
+    
+    for attempt in range(retries + 1):
+        try:
+            res = requests.get(url, timeout=timeout)
+            entries = res.json()
 
-    try:
-        # Make the HTTPS request to crt.sh
-        url = f"https://crt.sh/?q=%.{domain}&output=json"
-        res = requests.get(url, timeout=10)
-        entries = res.json()
+            subs = set()
+            for e in entries:
+                for s in e['name_value'].split('\n'):
+                    if domain in s:
+                        subs.add(s.strip())
+            return list(sorted(subs))
 
-        # Use a set to avoid duplicates
-        subs = set()
-        for e in entries:
-            for s in e['name_value'].split('\n'):
-                if domain in s:
-                    subs.add(s.strip())
-
-        subdomains = sorted(subs)
-
-        # Save to cache
-        os.makedirs("cache", exist_ok=True)
-        with open(cache_file, "w") as f:
-            json.dump(subdomains, f, indent=2)
-
-        return subdomains
-
-    except Exception as e:
-        # Fallback to cached results if available
-        if os.path.exists(cache_file):
-            with open(cache_file, "r") as f:
-                return json.load(f)
-        return {"error": str(e)}
+        except requests.exceptions.Timeout:
+            if attempt < retries:
+                time.sleep(3)  # wait before retry
+                continue
+            return {"error": f"Timeout after {retries + 1} attempts (timeout={timeout}s)"}
+        
+        except Exception as e:
+            return {"error": str(e)}

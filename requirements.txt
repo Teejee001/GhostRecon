@@ -1,3 +1,5 @@
 requests
 reportlab
 whois
+beautifulsoup4
+lxml

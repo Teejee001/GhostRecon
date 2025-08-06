@@ -1,74 +1,78 @@
-# GhostRecon 🕵️‍♂️
+# 👻 GhostRecon
 
-GhostRecon is an advanced Bug Bounty & OSINT Reconnaissance tool built with Python. It is designed to automate reconnaissance tasks during penetration testing or bug bounty engagements.
+**GhostRecon** is an advanced OSINT and bug bounty reconnaissance tool designed for gathering vital intelligence on domains and websites. It performs WHOIS lookups, IP information gathering, subdomain enumeration, email extraction, and exposure checks.
 
-## 💡 Features
-
-- 🔍 Subdomain Enumeration (via Amass + crt.sh)
-- 📧 Email Address Extraction
-- 🌐 WHOIS Lookup
-- 🛰️ IP Info Lookup
-- 🛡️ Domain Exposure Check (Leak Detection)
-- 📝 Generates PDF Reports
-- 📁 Saves structured results in folders
-- 💻 CLI-based usage, lightweight, and fast
+> 🔒 **For educational and ethical hacking purposes only. Do not use on unauthorized targets.**
 
 ---
 
-## 🚀 Installation
+## ✨ Features
+
+- 🔍 WHOIS Lookup
+- 🌐 IP Geolocation and Network Info
+- 🕵️ Subdomain Enumeration (via crt.sh)
+- 📧 Email Extraction from Target Website
+- ⚔️ Domain Exposure Detection
+- 📄 PDF Report Generation
+- 🐙 Bug Bounty Recon Utility
+
+---
+
+## 📦 Requirements
+
+Install all dependencies using:
 
 ```bash
-git clone https://github.com/yourusername/GhostRecon.git
-cd GhostRecon
-python3 -m venv venv
-source venv/bin/activate
 pip install -r requirements.txt
 
-## Usage Examples
+Dependencies include:
 
-Here are some common commands you can use with GhostRecon:
+requests
 
-```bash
-# Perform WHOIS lookup
+reportlab
+
+beautifulsoup4
+
+whois
+
+
+💻 Usage
+Basic syntax:
+
+bash
+python3 main.py --url <target_domain> [options]
+
+
+🔧 Examples
+
+WHOIS lookup:
+
 python3 main.py --url example.com --whois
 
-# Get IP info
-python3 main.py --url example.com --ipinfo
+Subdomain enumeration:
 
-# Enumerate subdomains (using crt.sh and Amass)
 python3 main.py --url example.com --subdomains
 
-# Extract emails from the target domain
+Extract emails from website:
+
 python3 main.py --url https://example.com --emails
 
-# Check for domain exposure on known breaches
-python3 main.py --url example.com --check-stealer
+All-in-one:
 
-# Save results as text and PDF
-python3 main.py --url example.com --whois --ipinfo --save results
+python3 main.py --url example.com --whois --ipinfo --subdomains --emails --check-stealer --save results
 
-📂 Output
-All results are printed to the terminal
+📁 Output
+Results are saved in the results/ directory
 
-Reports are saved in the results/ folder
-
-PDF files are automatically generated if --save is used
-
-
-📄 License
-This project is licensed under the MIT License — you are free to use, modify, and share.
-
-
-🤝 Contributing
-Feel free to fork the repo, improve the tool, and submit pull requests.
-
-
-👨‍💻 Developer
-Built by Ghostynox 🐱‍💻 for the cybersecurity community.
-
-
+Each scan is stored as a .txt and .pdf report
 
 ⚠️ Disclaimer
-This tool is developed strictly for educational and ethical penetration testing purposes only.
-Unauthorized scanning or reconnaissance on websites without proper authorization is illegal and against GitHub's Terms of Service.
-The developers are not responsible for any misuse of this tool.
+This tool is developed strictly for educational and authorized security testing. The author is not responsible for any misuse or illegal activity carried out using this tool.
+
+🛡 License
+This project is licensed under the MIT License.
+
+👨‍💻 Developer
+Created with ❤️ by Teejay001/Ghostynox
+
+GitHub: Teejay001

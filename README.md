@@ -24,6 +24,29 @@ python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
 
+## Usage Examples
+
+Here are some common commands you can use with GhostRecon:
+
+```bash
+# Perform WHOIS lookup
+python3 main.py --url example.com --whois
+
+# Get IP info
+python3 main.py --url example.com --ipinfo
+
+# Enumerate subdomains (using crt.sh and Amass)
+python3 main.py --url example.com --subdomains
+
+# Extract emails from the target domain
+python3 main.py --url https://example.com --emails
+
+# Check for domain exposure on known breaches
+python3 main.py --url example.com --check-stealer
+
+# Save results as text and PDF
+python3 main.py --url example.com --whois --ipinfo --save results
+
 📂 Output
 All results are printed to the terminal
 
@@ -42,3 +65,10 @@ Feel free to fork the repo, improve the tool, and submit pull requests.
 
 👨‍💻 Developer
 Built by Ghostynox 🐱‍💻 for the cybersecurity community.
+
+
+
+⚠️ Disclaimer
+This tool is developed strictly for educational and ethical penetration testing purposes only.
+Unauthorized scanning or reconnaissance on websites without proper authorization is illegal and against GitHub's Terms of Service.
+The developers are not responsible for any misuse of this tool.
